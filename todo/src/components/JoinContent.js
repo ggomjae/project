@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 
-class first extends Component{
+class JoinContent extends Component{
     render(){
         return (
             <div>
-                first다
+                JoinContent
             </div>
         );
     }
 }
 
-export default first;
+export default JoinContent;
