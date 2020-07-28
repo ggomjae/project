@@ -12,17 +12,38 @@ async function GetUserList(){
     try{
         conn = await pool.getConnection();
         conn.query('USE blog');
-        rows = await conn.query('SELECT * FROM products');
+        rows = await conn.query('SELECT * FROM POST');
     }
     catch(err){
         throw err;
     }
     finally{
         if (conn) conn.end();
-        return rows[0];
+        return rows;
     }
 }
- 
+
+async function CreatePost(data){
+    let conn, rows;
+    const title = data.title;
+    const content = data.content;
+    const writer = data.writer;
+
+    try{
+        conn = await pool.getConnection();
+        conn.query('USE blog');
+        rows = await conn.query('INSERT INTO POST (title, content,writer,regdate) VALUES(?,?,?,now())',[title, content, writer]);
+    }
+    catch(err){
+        throw err;
+    }
+    finally{
+        if(conn) conn.end();
+        return rows;
+    }
+}
+
 module.exports = {
-    getUserList: GetUserList
+    getUserList: GetUserList,
+    createPost: CreatePost
 }

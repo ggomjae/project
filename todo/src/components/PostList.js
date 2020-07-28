@@ -5,25 +5,33 @@ class PostList extends Component{
     constructor(props) {
         super(props);
         this.state = {
-                username:null,
-                subject : {title:'web',sub:'gomjae'}
+                post:[]
         };
     }
-
     componentDidMount(){
-        fetch('api')
-            .then(res=>res.json())
-            .then(data=>this.setState({username:data.name}));
+        this.callApi()
+            .then(res => this.setState({post: res}))
+            .catch(err => console.log(err))
+    }
+
+    callApi = async () => {
+        const response = await fetch('/api/list')
+        const body = await response.json()
+        console.log(body)
+        return body
     }
 
     render(){
 
-        const {username} = this.state;
-
+        const {post} = this.state;
+        
+        
         return (
             <div>
-                {username ? `Hello ${username}` : 'Hello World'}
-                PostList
+                <div>
+                    {post.map(v => <p>{v.bno}</p>)}
+                    {post.map(v => <p>{v.title}</p>)}
+                </div>
             </div>
         );
     }
