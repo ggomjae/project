@@ -32,7 +32,14 @@ class CreatePost extends Component{
               'content-type': 'application/json'
             }
         }    
-        return Axios.post(url, data, config)
+        Axios.post(url, data, config)
+            .then(
+                alert('success')
+            
+            )
+            .catch(e=>{
+                console.log(e)
+            })
     }
 
     handleFormSubmit(e) {
@@ -47,10 +54,7 @@ class CreatePost extends Component{
         let nextState = {};
         nextState[e.target.name] = e.target.value;
         this.setState(nextState);
-    }
-
-    
-        
+    }   
 
     render(){
         return (

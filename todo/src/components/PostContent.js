@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 
-class Title extends Component{
+class PostContent extends Component{
     render(){
         return (
             <div>
-                ToDo List Title
+                PostContent
             </div>
         );
     }
 }
 
-export default Title;
+export default PostContent;

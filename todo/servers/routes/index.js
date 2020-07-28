@@ -30,6 +30,21 @@ router.post('/create', (req, res)=>{
     }
 );
 
+router.post('/remove', (req, res)=> {
+    const data = {
+        "bno" : req.body.bno
+    }   
+
+    mdbConn.removePost(data)
+        .then((rows) => {
+            res.json(rows)
+            console.log(rows);  
+        }).catch((errMsg) => {
+            console.log(errMsg);
+        }) 
+})
+
+
 router.get('/group', (req, res)=>res.json({username:'dev group. bryan'}));
 
 

@@ -24,6 +24,7 @@ async function GetUserList(){
 }
 
 async function CreatePost(data){
+
     let conn, rows;
     const title = data.title;
     const content = data.content;
@@ -43,7 +44,25 @@ async function CreatePost(data){
     }
 }
 
+async function RemovePost(data){
+    let conn, rows;
+    const bno = data.bno;
+    try{
+        conn = await pool.getConnection();
+        conn.query('USE blog');
+        rows = await conn.query('DELETE FROM POST WHERE bno = ?',[bno]);
+    }
+    catch(err){
+        throw err;
+    }
+    finally{
+        if(conn) conn.end();
+        return rows;
+    }
+}
+
 module.exports = {
     getUserList: GetUserList,
-    createPost: CreatePost
+    createPost: CreatePost,
+    removePost: RemovePost
 }

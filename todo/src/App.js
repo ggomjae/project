@@ -32,7 +32,7 @@ class App extends React.Component {
             <Route exact path="/" component={Main} />
             <Route path="/join" component={Join} />
             <Route exact path="/login" component={Login} />
-            <Route path="/post" component={Post} />
+            <Route path="/post/:postId" component={Post} />
           </Switch>
         </main>
       </Router>

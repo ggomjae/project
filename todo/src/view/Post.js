@@ -1,13 +1,25 @@
 import React, {Component} from 'react'
-import RemovePost from '../components/RemovePost'
 import UpdatePost from '../components/UpdatePost'
 import Reply from '../components/Reply'
+import PostContent from '../components/PostContent'
 
 class Post extends Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {  
+            postId : props.match.params.postId
+        };
+      }
+
     render(){
+
+        const {postId} = this.state;
+
         return (
             <div>
-                <RemovePost></RemovePost>
+                {postId}
+                <PostContent></PostContent>
                 <UpdatePost></UpdatePost>
                 <Reply></Reply>
             </div>
