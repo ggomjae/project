@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import Axios from 'axios'
 class JoinContent extends Component{
 
     constructor(props) {
@@ -10,11 +10,37 @@ class JoinContent extends Component{
             password: '',
             email: '',
         }
+
+        this.handleFormSubmit = this.handleFormSubmit.bind(this)    
         this.handleValueChange = this.handleValueChange.bind(this)
+        this.createUser = this.createUser.bind(this)
+    }
+
+    createUser(){
+
+        const url = '/api/createuser';  
+        const data = {
+            'id' : this.state.id,
+            'password' : this.state.password,
+            'email' : this.state.email
+        }
+
+        const config = {
+            headers: {
+              'content-type': 'application/json'
+            }
+        }    
+        Axios.post(url, data, config)
+            .then((token) => {
+                alert(token.data)
+            }).catch(e=>{
+                console.log(e)
+            })
     }
 
     handleFormSubmit(e) {
         e.preventDefault()
+        this.createUser()
     }
 
     handleValueChange(e) {

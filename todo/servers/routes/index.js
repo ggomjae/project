@@ -1,6 +1,7 @@
 const express = require('express');
 const mdbConn = require('../mariaDBConn.js')
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 router.get('/list', (req, res)=>
 
@@ -73,5 +74,48 @@ router.post('/update', (req, res)=> {
             console.log(errMsg);
         }) 
 })
+
+//////////////User/////////////////////
+router.post('/createuser', (req, res)=>{
+    const data = {
+        "id" : req.body.id,
+        "password" : req.body.password,
+        "email" : req.body.email
+    }
+
+    mdbConn.findUser(data)
+        .then((row) => {
+            console.log(row)
+        }).catch((errMsg) => {
+            console.log("xxxxxxxxxxxx")
+        }) 
+});
+
+router.post('/loginuser', (req, res)=>{
+    const getToken = () => {
+      return new Promise((resolve, reject) => {
+            jwt.sign(
+            {
+                "id": req.body.id,
+                "password": req.body.password,
+                "email" : req.body.email     // 유저 정보
+            },
+            'SeCrEtKeYfOrHaShInG',   // secrec Key  
+            {
+                expiresIn: '7d',
+                issuer: 'inyongTest',   // options
+                subject: 'userInfo'
+            }, 
+            function(err,token){
+                if(err) reject(err)      // callback
+                else resolve(token)
+                }
+            )
+        });
+    } 
+    getToken().then(token =>{
+      res.send(token); 
+    })
+});
 
 module.exports = router;
