@@ -22,9 +22,6 @@ class App extends React.Component {
           <Link to="/login">
             <button>login</button>
           </Link>
-          <Link to="/post">
-            <button>post</button>
-          </Link>
         </header>
         <hr />
         <main>

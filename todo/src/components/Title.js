@@ -4,7 +4,7 @@ class Title extends Component{
     render(){
         return (
             <div>
-                ToDo List Title
+                <h1>ToDo List Title</h1>
             </div>
         );
     }

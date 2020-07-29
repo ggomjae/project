@@ -4,7 +4,8 @@ class Reply extends Component{
     render(){
         return (
             <div>
-                Reply
+                <h1>Reply</h1>
+                -----------
             </div>
         );
     }

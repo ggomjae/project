@@ -34,10 +34,9 @@ class CreatePost extends Component{
         }    
         Axios.post(url, data, config)
             .then(
-                alert('success')
-            
-            )
-            .catch(e=>{
+                alert('success'),
+                window.location.reload()           
+            ).catch(e=>{
                 console.log(e)
             })
     }

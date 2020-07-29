@@ -7,7 +7,6 @@ router.get('/list', (req, res)=>
     mdbConn.getUserList()
         .then((rows) => {
             res.json(rows)
-            console.log(rows);
     }).catch((errMsg) => {
         console.log(errMsg);
     }) 
@@ -44,8 +43,35 @@ router.post('/remove', (req, res)=> {
         }) 
 })
 
+router.get('/post/:postid', (req, res)=> {
+    
+    const data = {
+        "postid" : req.params.postid
+    }
 
-router.get('/group', (req, res)=>res.json({username:'dev group. bryan'}));
+    mdbConn.getPost(data)
+        .then((row) => {
+            res.json(row)
+            console.log(row);  
+        }).catch((errMsg) => {
+            console.log(errMsg);
+        }) 
+})
 
+router.post('/update', (req, res)=> {
+    
+    const data = {
+        "postid" : req.body.postid,
+        "content" : req.body.content
+    }
+
+    mdbConn.updatePost(data)
+        .then((row) => {
+            res.json(row)
+            console.log(row);  
+        }).catch((errMsg) => {
+            console.log(errMsg);
+        }) 
+})
 
 module.exports = router;

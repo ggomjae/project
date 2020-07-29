@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Axios from 'axios'
+import history from '../history';
 
 class PostList extends Component{
 
@@ -37,7 +38,8 @@ class PostList extends Component{
 
         Axios.post(url, data, config)
             .then(
-                alert('success')
+                alert('success'),
+                window.location.reload()
             ).catch(e=>{
                 console.log(e)
             })
@@ -45,7 +47,8 @@ class PostList extends Component{
 
     movePath(param){
         alert(param)
-        
+        history.push('/post/'+param)
+        window.location.reload()
     }
 
     render(){

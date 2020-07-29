@@ -61,8 +61,46 @@ async function RemovePost(data){
     }
 }
 
+async function GetPost(data){
+    let conn, row;
+    const postid = data.postid;
+    try{
+        conn = await pool.getConnection();
+        conn.query('USE blog');
+        row = await conn.query('SELECT * FROM POST WHERE bno = ?',[postid]);
+    }
+    catch(err){
+        throw err;
+    }
+    finally{
+        if(conn) conn.end();
+        return row;
+    }
+}
+
+async function UpdatePost(data){
+    let conn, row;
+    console.log(data)
+    const postid = data.postid;
+    const content = data.content;
+    try{
+        conn = await pool.getConnection();
+        conn.query('USE blog');
+        row = await conn.query('UPDATE POST SET content = ? WHERE bno = ?',[content,postid]);
+    }
+    catch(err){
+        throw err;
+    }
+    finally{
+        if(conn) conn.end();
+        return row;
+    }
+}
+
 module.exports = {
     getUserList: GetUserList,
     createPost: CreatePost,
-    removePost: RemovePost
+    removePost: RemovePost,
+    getPost : GetPost,
+    updatePost : UpdatePost
 }

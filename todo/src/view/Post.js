@@ -15,12 +15,11 @@ class Post extends Component{
     render(){
 
         const {postId} = this.state;
-
+        console.log(postId)
         return (
             <div>
-                {postId}
-                <PostContent></PostContent>
-                <UpdatePost></UpdatePost>
+                <PostContent id = {postId}></PostContent>
+                <UpdatePost id = {postId}></UpdatePost>
                 <Reply></Reply>
             </div>
         );
