@@ -6,6 +6,7 @@ import PostContent from '../components/PostContent'
 class Post extends Component{
 
     constructor(props) {
+        
         super(props);
         this.state = {  
             postId : props.match.params.postId
@@ -15,7 +16,7 @@ class Post extends Component{
     render(){
 
         const {postId} = this.state;
-        console.log(postId)
+    
         return (
             <div>
                 <PostContent id = {postId}></PostContent>

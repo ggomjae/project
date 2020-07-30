@@ -17,10 +17,9 @@ class UpdatePost extends Component{
 
     updatePost(){
         
-        const url =  '/api/update'
-       
+        const url =  '/api/update/' + this.props.id;
+        console.log(url)
         const data = {
-            'postid' : this.state.postId,
             'content' : this.state.content
         }
 
@@ -29,7 +28,7 @@ class UpdatePost extends Component{
               'content-type': 'application/json'
             }
         }    
-        Axios.post(url, data, config)
+        Axios.put(url, data, config)
             .then(
                 alert('success'),
                 window.location.reload()           
@@ -55,6 +54,7 @@ class UpdatePost extends Component{
                 <h1>UpdatePost</h1>
                 <form onSubmit={this.handleFormSubmit}>
                         Content: <input type="text" name="content" value={this.state.content} onChange={this.handleValueChange} /><br/>
+                   
                     <button type="submit">update</button>
                 </form>
             </div>

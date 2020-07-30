@@ -3,17 +3,20 @@ const mdbConn = require('../mariaDBConn.js')
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
+///////////////get postlist/////////////////////
 router.get('/list', (req, res)=>
 
     mdbConn.getUserList()
         .then((rows) => {
             res.json(rows)
-    }).catch((errMsg) => {
-        console.log(errMsg);
+    }).catch((err) => {
+        console.log(err);
     }) 
 );
 
+///////////////create post/////////////////////
 router.post('/create', (req, res)=>{
+
     const data = {
         "title" : req.body.title,
         "content" : req.body.content,
@@ -24,26 +27,29 @@ router.post('/create', (req, res)=>{
         .then((rows) => {
             res.json(rows)
             console.log(rows);  
-        }).catch((errMsg) => {
-            console.log(errMsg);
+        }).catch((err) => {
+            console.log(err);
         }) 
     }
 );
 
-router.post('/remove', (req, res)=> {
+///////////////remove post/////////////////////
+router.delete('/remove/:postid', (req, res)=> {
+
     const data = {
-        "bno" : req.body.bno
+      "bno" : req.params.postid
     }   
 
     mdbConn.removePost(data)
         .then((rows) => {
             res.json(rows)
             console.log(rows);  
-        }).catch((errMsg) => {
-            console.log(errMsg);
+        }).catch((err) => {
+            console.log(err);
         }) 
 })
 
+///////////////get post/////////////////////
 router.get('/post/:postid', (req, res)=> {
     
     const data = {
@@ -52,31 +58,31 @@ router.get('/post/:postid', (req, res)=> {
 
     mdbConn.getPost(data)
         .then((row) => {
-            res.json(row)
-            console.log(row);  
-        }).catch((errMsg) => {
-            console.log(errMsg);
+            res.json(row) 
+        }).catch((err) => {
+            console.log(err);
         }) 
 })
 
-router.post('/update', (req, res)=> {
+///////////////update post/////////////////////
+router.put('/update/:postid', (req, res)=> {
     
     const data = {
-        "postid" : req.body.postid,
+        "postid" : req.params.postid,
         "content" : req.body.content
     }
 
     mdbConn.updatePost(data)
         .then((row) => {
             res.json(row)
-            console.log(row);  
-        }).catch((errMsg) => {
-            console.log(errMsg);
+        }).catch((err) => {
+            console.log(err);
         }) 
 })
 
-//////////////User/////////////////////
+///////////////create user/////////////////////
 router.post('/createuser', (req, res)=>{
+
     const data = {
         "id" : req.body.id,
         "password" : req.body.password,
@@ -84,14 +90,16 @@ router.post('/createuser', (req, res)=>{
     }
 
     mdbConn.findUser(data)
-        .then((row) => {
-            console.log(row)
-        }).catch((errMsg) => {
-            console.log("xxxxxxxxxxxx")
+        .then((result) => {
+            res.send(result)
+        }).catch((err) => {
+            console.log(err)
         }) 
 });
-////////////////////Mcok Login /////////////////////////
+
+///////////////login user////////////////////
 router.post('/loginuser', (req, res)=> {
+
     const data = {
         "id" : req.body.id,
         "password" : req.body.password
@@ -99,7 +107,7 @@ router.post('/loginuser', (req, res)=> {
 
     mdbConn.loginUser(data)
         .then((row) => {
-            console.log("loginUser",row)
+            
             if(row){
                 const getToken = () => {
                 return new Promise((resolve, reject) => {
@@ -107,16 +115,16 @@ router.post('/loginuser', (req, res)=> {
                         {
                             "id": req.body.id,
                             "password": req.body.password,
-                            "email" : req.body.email     // 유저 정보
+                            "email" : req.body.email     
                         },
-                        'SeCrEtKeYfOrHaShInG',   // secrec Key  
+                        'SeCrEtKeYfOrHaShInG',   
                         {
                             expiresIn: '7d',
-                            issuer: 'inyongTest',   // options
+                            issuer: 'inyongTest',   
                             subject: 'userInfo'
                         }, 
                         function(err,token){
-                            if(err) reject(err)      // callback
+                            if(err) reject(err)      
                             else resolve(token)
                             }
                         )
@@ -128,39 +136,10 @@ router.post('/loginuser', (req, res)=> {
             }else{
                 res.send(null);
             }
-        }).catch((errMsg) => {
-            console.log(errMsg)
+        }).catch((err) => {
+            console.log(err)
         }) 
 })
 
-
-///////////////////////// mock login ///////////////////
-router.post('/mocklogin', (req, res)=>{
-    // const getToken = () => {
-    //   return new Promise((resolve, reject) => {
-    //         jwt.sign(
-    //         {
-    //             "id": req.body.id,
-    //             "password": req.body.password,
-    //             "email" : req.body.email     // 유저 정보
-    //         },
-    //         'SeCrEtKeYfOrHaShInG',   // secrec Key  
-    //         {
-    //             expiresIn: '7d',
-    //             issuer: 'inyongTest',   // options
-    //             subject: 'userInfo'
-    //         }, 
-    //         function(err,token){
-    //             if(err) reject(err)      // callback
-    //             else resolve(token)
-    //             }
-    //         )
-    //     });
-    // } 
-    // getToken().then(token =>{
-    //   res.send(token); 
-    // })
-});
-/////////////////////////////////////////////////////////
-
+///////////////module////////////////////
 module.exports = router;

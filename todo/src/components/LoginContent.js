@@ -26,6 +26,7 @@ class LoginContent extends Component{
               'content-type': 'application/json'
             }
         }    
+        
         Axios.post(url, data, config)
             .then((accessToken) => {
                 

@@ -56,6 +56,7 @@ class CreatePost extends Component{
     }   
 
     render(){
+        
         return (
             <form onSubmit={this.handleFormSubmit}>
                 <h1>Create Post</h1>

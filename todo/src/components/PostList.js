@@ -24,8 +24,8 @@ class PostList extends Component{
     }
 
     removeFunction(param) {
-        alert(param);
-        const url = '/api/remove';  
+       
+        const url = '/api/remove/' + param;  
         const data = {
             'bno' : param
         }
@@ -36,7 +36,7 @@ class PostList extends Component{
             }
         }
 
-        Axios.post(url, data, config)
+        Axios.delete(url, data, config)
             .then(
                 alert('success'),
                 window.location.reload()
