@@ -1,7 +1,7 @@
 const mariadb = require('mariadb');
 const vals = require('./consts.js');
 const bcrypt = require('bcrypt-nodejs'); 
-
+const jwt = require('jsonwebtoken');
 const pool = mariadb.createPool({
     host: vals.DBHost, port:vals.DBPort,
     user: vals.DBUser, password: vals.DBPass,
@@ -97,7 +97,7 @@ async function UpdatePost(data){
         return row;
     }
 }
-////////user/////////////////////////
+////////create user/////////////////////////
 async function FindUser(data){
     let conn, row;
     const id = data.id;
@@ -127,6 +127,35 @@ async function FindUser(data){
         return row;
     }
 }
+///////////////login user////////////////////
+async function LoginUser(data){
+    let conn, row;
+    const id = data.id;
+    const password = data.password;
+
+    try{
+        conn = await pool.getConnection();
+        conn.query('USE blog');
+        row = await conn.query('SELECT password FROM USER WHERE id = ?',[id])
+        
+        if(row.length){
+            
+            return new Promise((resolve, reject) => {
+                bcrypt.compare(password, row[0].password, function(err, res) {
+                    if (err) reject(err)
+                    
+                    resolve(res)
+                });
+        })}else{
+           
+            return false;
+        }
+    }catch(err){
+        throw err;
+    }finally{
+        if(conn) conn.end();
+    }
+}
 
 module.exports = {
     getUserList: GetUserList,
@@ -134,5 +163,6 @@ module.exports = {
     removePost: RemovePost,
     getPost : GetPost,
     updatePost : UpdatePost,
-    findUser : FindUser
+    findUser : FindUser,
+    loginUser : LoginUser
 }

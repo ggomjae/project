@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import Axios from 'axios'
 class LoginContent extends Component{
 
     constructor(props) {
@@ -9,11 +9,41 @@ class LoginContent extends Component{
             id: '',
             password: '',
         }
+        this.handleFormSubmit = this.handleFormSubmit.bind(this) 
         this.handleValueChange = this.handleValueChange.bind(this)
+        this.loginUser = this.loginUser.bind(this)
+    }
+
+    loginUser(){
+        const url = '/api/loginuser';  
+        const data = {
+            'id' : this.state.id,
+            'password' : this.state.password
+        }
+
+        const config = {
+            headers: {
+              'content-type': 'application/json'
+            }
+        }    
+        Axios.post(url, data, config)
+            .then((accessToken) => {
+                
+                if(accessToken.data){
+                    alert("Login Success")
+                    localStorage.setItem("accessToken",accessToken.data);
+                }else{
+                    alert("Login fail")
+                }
+                    
+            }).catch(e=>{
+                console.log(e)
+            })
     }
 
     handleFormSubmit(e) {
         e.preventDefault()
+        this.loginUser()
     }
 
     handleValueChange(e) {

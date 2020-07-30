@@ -90,32 +90,77 @@ router.post('/createuser', (req, res)=>{
             console.log("xxxxxxxxxxxx")
         }) 
 });
+////////////////////Mcok Login /////////////////////////
+router.post('/loginuser', (req, res)=> {
+    const data = {
+        "id" : req.body.id,
+        "password" : req.body.password
+    }
 
-router.post('/loginuser', (req, res)=>{
-    const getToken = () => {
-      return new Promise((resolve, reject) => {
-            jwt.sign(
-            {
-                "id": req.body.id,
-                "password": req.body.password,
-                "email" : req.body.email     // 유저 정보
-            },
-            'SeCrEtKeYfOrHaShInG',   // secrec Key  
-            {
-                expiresIn: '7d',
-                issuer: 'inyongTest',   // options
-                subject: 'userInfo'
-            }, 
-            function(err,token){
-                if(err) reject(err)      // callback
-                else resolve(token)
-                }
-            )
-        });
-    } 
-    getToken().then(token =>{
-      res.send(token); 
-    })
+    mdbConn.loginUser(data)
+        .then((row) => {
+            console.log("loginUser",row)
+            if(row){
+                const getToken = () => {
+                return new Promise((resolve, reject) => {
+                        jwt.sign(
+                        {
+                            "id": req.body.id,
+                            "password": req.body.password,
+                            "email" : req.body.email     // 유저 정보
+                        },
+                        'SeCrEtKeYfOrHaShInG',   // secrec Key  
+                        {
+                            expiresIn: '7d',
+                            issuer: 'inyongTest',   // options
+                            subject: 'userInfo'
+                        }, 
+                        function(err,token){
+                            if(err) reject(err)      // callback
+                            else resolve(token)
+                            }
+                        )
+                    });
+                } 
+                getToken().then(token =>{
+                    res.send(token); 
+                })
+            }else{
+                res.send(null);
+            }
+        }).catch((errMsg) => {
+            console.log(errMsg)
+        }) 
+})
+
+
+///////////////////////// mock login ///////////////////
+router.post('/mocklogin', (req, res)=>{
+    // const getToken = () => {
+    //   return new Promise((resolve, reject) => {
+    //         jwt.sign(
+    //         {
+    //             "id": req.body.id,
+    //             "password": req.body.password,
+    //             "email" : req.body.email     // 유저 정보
+    //         },
+    //         'SeCrEtKeYfOrHaShInG',   // secrec Key  
+    //         {
+    //             expiresIn: '7d',
+    //             issuer: 'inyongTest',   // options
+    //             subject: 'userInfo'
+    //         }, 
+    //         function(err,token){
+    //             if(err) reject(err)      // callback
+    //             else resolve(token)
+    //             }
+    //         )
+    //     });
+    // } 
+    // getToken().then(token =>{
+    //   res.send(token); 
+    // })
 });
+/////////////////////////////////////////////////////////
 
 module.exports = router;
