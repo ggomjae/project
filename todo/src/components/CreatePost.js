@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Axios from 'axios'
+import Store from '../store'
 
 class CreatePost extends Component{
 
@@ -33,21 +34,17 @@ class CreatePost extends Component{
             }
         }    
         Axios.post(url, data, config)
-            .then(
-                alert('success'),
-                window.location.reload()           
-            ).catch(e=>{
+            .then((res)=>{
+                alert('success')
+                Store.dispatch({type:'ADDPOST'});
+            }).catch(e=>{
                 console.log(e)
-            })
+        })
     }
 
     handleFormSubmit(e) {
         e.preventDefault()
-           
         this.createPost()
-            .then((response) => {    
-                console.log(response.data);
-        })
     }
 
     handleValueChange(e) {

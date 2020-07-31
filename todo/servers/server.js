@@ -4,7 +4,9 @@ const port = 3002;
 const route = require('./routes/index');
 const bodyParser = require('body-parser');
 
+
 app.use(bodyParser.json());
+
 app.use('/api', route); 
 
 app.listen(port, ()=>{
