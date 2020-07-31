@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import Axios from 'axios'
+import Store from '../store'
+
 class LoginContent extends Component{
 
     constructor(props) {
@@ -33,6 +35,7 @@ class LoginContent extends Component{
                 if(accessToken.data){
                     alert("Login Success")
                     localStorage.setItem("accessToken",accessToken.data);
+                    Store.dispatch({type:'ADDTOKEN',  token : accessToken});
                 }else{
                     alert("Login fail")
                 }

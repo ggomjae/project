@@ -3,9 +3,10 @@ import Axios from 'axios'
 import history from '../history';
 
 class PostList extends Component{
-
+    
     constructor(props) {
         super(props);
+        
         this.state = {
                 posts:[]
         };

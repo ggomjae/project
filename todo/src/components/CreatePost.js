@@ -6,7 +6,7 @@ class CreatePost extends Component{
     constructor(props) {
         super(props);
         this.state = {
-        
+
             title: '',
             content: '',
             writer: '',
@@ -43,6 +43,7 @@ class CreatePost extends Component{
 
     handleFormSubmit(e) {
         e.preventDefault()
+           
         this.createPost()
             .then((response) => {    
                 console.log(response.data);
