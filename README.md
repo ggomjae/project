@@ -11,7 +11,7 @@ TodoList [intern proejct]
 
 ```각 View에 알맞은 Component를 import하여 조합. ```
 
-<div><img src="https://user-images.githubusercontent.com/43604493/88985933-8e60d380-d30c-11ea-91f7-a489fba36658.jpeg" align="left" width="100%"></div>
+<div><img src="https://user-images.githubusercontent.com/43604493/88986709-b7826380-d30e-11ea-9698-1dc3bb6b3220.jpeg" align="left" width="100%"></div>
 
 
 ## BackEnd Architecture
