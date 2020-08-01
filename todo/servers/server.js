@@ -10,5 +10,6 @@ app.use(bodyParser.json());
 app.use('/api', route); 
 
 app.listen(port, ()=>{
+    console.log("--------------------------")
     console.log(`express is running on ${port}`);
 })
