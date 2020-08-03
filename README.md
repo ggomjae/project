@@ -27,18 +27,17 @@ TodoList [intern proejct]
 
 //project/todo/servers/server.js
 app.use(bodyParser.json());
-app.use('/api/posts', postrouter);   // post  
-app.use('/api/auth', authrouter);    // auth
+app.use('/api/posts', postrouter);   // post router
+app.use('/api/auth', authrouter);    // auth router
 
 //project/todo/servers/routes/postsrouter.js - CRUD
 router.post('/')   - post create
 router.get('/')   - post list read
 router.get('/:postid')   - post read 
 router.delete('/:postid') - post delete
-router.put('/:postid')  - post update
-=======
-//project/todo/servers/routes/authrouter.js
+router.patch('/:postid')  - post content update
 
+//project/todo/servers/routes/authrouter.js
 router.post('/new')  - user join   
 router.post('/') + json web token  - user login
 

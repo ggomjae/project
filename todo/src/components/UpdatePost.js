@@ -28,7 +28,7 @@ class UpdatePost extends Component{
               'content-type': 'application/json'
             }
         }    
-        Axios.put(url, data, config)
+        Axios.patch(url, data, config)
             .then(
                 alert('success'),
                 window.location.reload()           

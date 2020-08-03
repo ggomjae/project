@@ -1,4 +1,4 @@
-
+import './App.css'
 import React from "react";
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
@@ -11,28 +11,30 @@ class App extends React.Component {
 
   render(){
     return (
-      <Router>
-        <header>
-          <Link to="/">
-            <button>main</button>
-          </Link>
-          <Link to="/join">
-            <button>join</button>
-          </Link>
-          <Link to="/login">
-            <button>login</button>
-          </Link>
-        </header>
-        <hr />
-        <main>
-          <Switch>
-            <Route exact path="/" component={Main} />
-            <Route path="/join" component={Join} />
-            <Route exact path="/login" component={Login} />
-            <Route path="/post/:postId" component={Post} />
-          </Switch>
-        </main>
-      </Router>
+      <div className="App">
+        <Router>
+          <header>
+            <Link to="/">
+              <button>main</button>
+            </Link>
+            <Link to="/join">
+              <button>join</button>
+            </Link>
+            <Link to="/login">
+              <button>login</button>
+            </Link>
+          </header>
+          <hr />
+          <main>
+            <Switch>
+              <Route exact path="/" component={Main} />
+              <Route path="/join" component={Join} />
+              <Route exact path="/login" component={Login} />
+              <Route path="/post/:postId" component={Post} />
+            </Switch>
+          </main>
+        </Router>
+      </div>
     )
   }
 }

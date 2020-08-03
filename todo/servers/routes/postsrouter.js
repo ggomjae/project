@@ -49,7 +49,7 @@ router.get('/:postid', (req, res)=> {
 })
 
 ///////////////update post/////////////////////
-router.put('/:postid', (req, res)=> {
+router.patch('/:postid', (req, res)=> {
     
     const data = {
         "postid" : req.params.postid,

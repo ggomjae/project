@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Axios from 'axios'
 import Store from '../store'
 
+
 class CreatePost extends Component{
 
     constructor(props) {
