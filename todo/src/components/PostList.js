@@ -3,9 +3,26 @@ import Axios from 'axios'
 import history from '../history';
 import Store from '../store'
 
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
+import Table from '@material-ui/core/Table'
+import TableHead from '@material-ui/core/TableHead'
+import TableBody from '@material-ui/core/TableBody'
+import { withStyles } from '@material-ui/core/styles'
+import { Paper } from '@material-ui/core';
+
+const styles = theme => ({
+    root : {
+        witdh : '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX : "auto"
+    },
+    table: {
+        minWidth : 1080
+    }
+})
+
 class PostList extends Component{
-    
-    
 
     constructor(props) {
         super(props);
@@ -67,21 +84,36 @@ class PostList extends Component{
     render(){
 
         const {posts} = this.state;
-        
+        const { classes } = this.props;
+
         return (
-            <div>
+            <Paper className = {classes.root}>
                 <h1>Post List</h1>
-                    <div>
-                        {posts.map(v => ( 
-                                <p key={v.bno}>{v.bno} {v.title} {v.writer} {v.regdate} 
-                                    <button onClick={()=> this.removeFunction(v.bno)}>{"remove"}</button>
-                                    <button onClick={()=> this.movePath(v.bno)}>{"move"}</button>
-                                </p>
-                        ))}
-                    </div>
-            </div>
+                        <Table className = {classes.table}>
+                            <TableHead>
+                                <TableCell>Bno</TableCell>
+                                <TableCell>Title</TableCell>
+                                <TableCell>Writer</TableCell>
+                                <TableCell>Regdate</TableCell>
+                                <TableCell>REMOVE</TableCell>
+                                <TableCell>MOVE</TableCell>
+                            </TableHead>
+                            <TableBody>
+                                {posts.map(v => ( 
+                                    <TableRow key={v.bno}>
+                                        <TableCell>{v.bno}</TableCell>
+                                        <TableCell>{v.title}</TableCell>
+                                        <TableCell>{v.writer}</TableCell>
+                                        <TableCell>{v.regdate}</TableCell>
+                                        <TableCell><button onClick={()=> this.removeFunction(v.bno)}>{"remove"}</button></TableCell>
+                                        <TableCell><button onClick={()=> this.movePath(v.bno)}>{"move"}</button></TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+            </Paper>
         );
     }
 }
 
-export default PostList;
+export default withStyles(styles)(PostList);
