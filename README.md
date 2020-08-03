@@ -30,19 +30,14 @@ app.use(bodyParser.json());
 app.use('/api/posts', postrouter);   // post  
 app.use('/api/auth', authrouter);    // auth
 
-//project/todo/servers/routes/index.js - CRUD
+//project/todo/servers/routes/postsrouter.js - CRUD
 router.post('/')   - post create
 router.get('/')   - post list read
 router.get('/:postid')   - post read 
 router.delete('/:postid') - post delete
 router.put('/:postid')  - post update
 =======
-//project/todo/servers/routes/index.js
-router.get('/list')
-router.get('/post/:postid')
-router.post('/create')
-router.delete('/remove/:postid')
-router.put('/update/:postid')
+//project/todo/servers/routes/authrouter.js
 
 router.post('/new')  - user join   
 router.post('/') + json web token  - user login
