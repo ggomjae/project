@@ -24,7 +24,6 @@ TodoList [intern proejct]
 ```REST API Sever 구현```
 
 ```kt
-<<<<<<< HEAD
 
 //project/todo/servers/server.js
 app.use(bodyParser.json());
@@ -44,7 +43,6 @@ router.get('/post/:postid')
 router.post('/create')
 router.delete('/remove/:postid')
 router.put('/update/:postid')
->>>>>>> 1160503e41661631578014b2720141a44f361411
 
 router.post('/new')  - user join   
 router.post('/') + json web token  - user login
