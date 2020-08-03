@@ -13,5 +13,6 @@ app.use('/api/posts', postsrouter);
 app.use('/api/auth/users', authrouter); 
 
 app.listen(port, ()=>{
+    console.log("--------------------------")
     console.log(`express is running on ${port}`);
 })
