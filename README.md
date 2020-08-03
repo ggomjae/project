@@ -27,17 +27,18 @@ TodoList [intern proejct]
 
 //project/todo/servers/server.js
 app.use(bodyParser.json());
-app.use('/api', route); 
+app.use('/api/posts', postrouter);   // post  
+app.use('/api/auth', authrouter);    // auth
 
-//project/todo/servers/routes/index.js
-router.get('/list')
-router.get('/post/:postid')
-router.post('/create')
-router.delete('/remove/:postid')
-router.put('/update/:postid')
+//project/todo/servers/routes/index.js - CRUD
+router.post('/')   - post create
+router.get('/')   - post list read
+router.get('/:postid')   - post read 
+router.delete('/:postid') - post delete
+router.put('/:postid')  - post update
 
-router.post('/createuser')
-router.post('/loginuser') + json web token
+router.post('/new')  - user join   
+router.post('/') + json web token  - user login
 
 ```
 
@@ -51,9 +52,7 @@ router.post('/loginuser') + json web token
 ## Issue
 
 1. [HPM] Error occurred while trying to proxy request - body-parser로 인한 error 인듯
-2. SPA이므로 window.location.reload는 좋지않음
 
 ## Next
 
 1. http-proxy-middleware가 아닌 다른 proxy로 해결할 것
-2. Redux를 이용해서 SPA 장점 살릴 것

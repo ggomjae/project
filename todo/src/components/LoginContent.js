@@ -17,7 +17,7 @@ class LoginContent extends Component{
     }
 
     loginUser(){
-        const url = '/api/loginuser';  
+        const url = '/api/auth/users';  
         const data = {
             'id' : this.state.id,
             'password' : this.state.password

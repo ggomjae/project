@@ -16,7 +16,7 @@ class PostContent extends Component{
     }
 
     callApi = async () => {
-        const response = await fetch('/api/post/'+this.props.id)
+        const response = await fetch('/api/posts/'+this.props.id)
         const body = await response.json()
         return body[0]
     }

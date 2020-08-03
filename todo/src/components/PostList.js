@@ -30,7 +30,7 @@ class PostList extends Component{
 
     callApi = async () => {
        
-        const response = await fetch('/api/list')
+        const response = await fetch('/api/posts')
         const body = await response.json()
         console.log(body)
         return body
@@ -38,7 +38,7 @@ class PostList extends Component{
 
     removeFunction(param) {
        
-        const url = '/api/remove/' + param;  
+        const url = '/api/posts/' + param;  
         const data = {
             'bno' : param
         }
@@ -61,7 +61,7 @@ class PostList extends Component{
     movePath(param){
         alert(param)
         history.push('/post/'+param)
-        window.location.reload()
+        Store.dispatch({type:'MOVEPATH'})
     }
 
     render(){

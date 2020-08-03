@@ -17,7 +17,7 @@ class UpdatePost extends Component{
 
     updatePost(){
         
-        const url =  '/api/update/' + this.props.id;
+        const url =  '/api/posts/' + this.props.id;
         console.log(url)
         const data = {
             'content' : this.state.content

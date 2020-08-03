@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import UpdatePost from '../components/UpdatePost'
 import Reply from '../components/Reply'
 import PostContent from '../components/PostContent'
+import Store from '../store'
 
 class Post extends Component{
 
@@ -11,6 +12,9 @@ class Post extends Component{
         this.state = {  
             postId : props.match.params.postId
         };
+        Store.subscribe(function(){
+            console.log("dddd")
+        }.bind(this))
       }
 
     render(){

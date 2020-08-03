@@ -18,7 +18,7 @@ class JoinContent extends Component{
 
     createUser(){
 
-        const url = '/api/createuser';  
+        const url = '/api/auth/users/new';  
 
         const data = {
             'id' : this.state.id,

@@ -8,7 +8,6 @@ const pool = mariadb.createPool({
     host: vals.DBHost, port:vals.DBPort,
     user: vals.DBUser, password: vals.DBPass,
     connectionLimit: 10
-
 });
  
 ///////////////get postlist/////////////////////

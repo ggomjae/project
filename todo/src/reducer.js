@@ -1,6 +1,7 @@
 const initialState = {
     token : localStorage.getItem('accessToken'),
-    listState : false
+    listState : false,
+    moveState : false
   };
   
   export default (state = initialState, action) => {
@@ -11,7 +12,8 @@ const initialState = {
             return {...state , listState: !initialState.listState}
         case 'DELETEPOST' :
             return {...state , listState: !initialState.listState}
-        
+        case 'MOVEPATH' :
+            return {...state , moveState: !initialState.moveState}
         default :
             return state
     }

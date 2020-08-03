@@ -20,7 +20,7 @@ class CreatePost extends Component{
 
     createPost(){
 
-        const url = '/api/create';  
+        const url = '/api/posts';  
 
         const data = {
             'title' : this.state.title,

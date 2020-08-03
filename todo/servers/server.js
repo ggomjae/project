@@ -1,13 +1,16 @@
 const express = require('express');
 const app = express();
 const port = 3002;
-const route = require('./routes/index');
-const bodyParser = require('body-parser');
 
+const postsrouter = require('./routes/postsrouter');
+const authrouter = require('./routes/authrouter');
+
+const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
-app.use('/api', route); 
+app.use('/api/posts', postsrouter); 
+app.use('/api/auth/users', authrouter); 
 
 app.listen(port, ()=>{
     console.log(`express is running on ${port}`);
